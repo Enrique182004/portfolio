@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation & UX Details</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #060610;
+        color: #c4b5fd;
+        font-family: "Courier New", monospace;
+        padding: 32px;
+      }
+
+      h2 {
+        font-size: 14px;
+        letter-spacing: 4px;
+        color: #e9d5ff;
+        margin-bottom: 6px;
+      }
+      .sub {
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: #4c3d8a;
+        margin-bottom: 28px;
+      }
+      .label {
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: #6d5fa0;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .note {
+        font-size: 10px;
+        color: #6d5fa0;
+        line-height: 1.8;
+        margin-top: 10px;
+      }
+      .highlight {
+        color: #a78bfa;
+      }
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #1e1040, transparent);
+        margin: 32px 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+      }
+
+      /* Animation sequence diagram */
+      .sequence {
+        background: #09091a;
+        border: 1px solid #1e1040;
+        border-radius: 4px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .seq-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 16px;
+        position: relative;
+      }
+      .seq-step:last-child {
+        margin-bottom: 0;
+      }
+      .seq-num {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 1px solid #7c3aed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        color: #a78bfa;
+        flex-shrink: 0;
+        box-shadow: 0 0 8px rgba(124, 58, 237, 0.3);
+      }
+      .seq-content h4 {
+        font-size: 10px;
+        color: #c4b5fd;
+        letter-spacing: 2px;
+        margin-bottom: 4px;
+      }
+      .seq-content p {
+        font-size: 9px;
+        color: #6d5fa0;
+        line-height: 1.6;
+      }
+      .seq-line {
+        position: absolute;
+        left: 11px;
+        top: 22px;
+        bottom: -16px;
+        width: 1px;
+        background: linear-gradient(to bottom, #2d1b69, transparent);
+      }
+      .seq-step:last-child .seq-line {
+        display: none;
+      }
+
+      /* Mini starmap transition demo */
+      .transition-demo {
+        background: #070712;
+        border: 1px solid #1e1040;
+        border-radius: 4px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 8px;
+        min-height: 120px;
+      }
+      .mini-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .mini-ring {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid #6d28d9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mini-core {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #7c3aed;
+      }
+      .mini-label {
+        font-size: 7px;
+        letter-spacing: 2px;
+        color: #6d5fa0;
+      }
+      .mini-node.active .mini-ring {
+        border-color: #f0b429;
+        box-shadow: 0 0 12px rgba(240, 180, 41, 0.4);
+        animation: activeNode 1.5s ease-in-out infinite;
+      }
+      .mini-node.active .mini-core {
+        background: #f0b429;
+        box-shadow: 0 0 8px #f0b429;
+      }
+      .mini-node.active .mini-label {
+        color: #f0b429;
+      }
+      @keyframes activeNode {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(240, 180, 41, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(240, 180, 41, 0.6);
+        }
+      }
+      .arrow {
+        color: #2d1b69;
+        font-size: 18px;
+      }
+      .transition-label {
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: #4c3d8a;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      /* UX feature cards */
+      .ux-card {
+        background: #09091a;
+        border: 1px solid #1e1040;
+        border-radius: 4px;
+        padding: 16px;
+      }
+      .ux-card h4 {
+        font-size: 10px;
+        color: #c4b5fd;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .ux-card p {
+        font-size: 9px;
+        color: #6d5fa0;
+        line-height: 1.7;
+      }
+      .ux-icon {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      /* Naming cleanup table */
+      .name-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .name-table th {
+        font-size: 8px;
+        letter-spacing: 3px;
+        color: #4c3d8a;
+        padding: 6px 12px;
+        border-bottom: 1px solid #1e1040;
+        text-align: left;
+      }
+      .name-table td {
+        font-size: 9px;
+        padding: 8px 12px;
+        border-bottom: 1px solid #0f0a20;
+      }
+      .name-table .old {
+        color: #4c3d8a;
+        text-decoration: line-through;
+      }
+      .name-table .new {
+        color: #a78bfa;
+      }
+      .name-table .reason {
+        color: #3b2d6a;
+        font-size: 8px;
+      }
+
+      /* Entry animation preview */
+      .entry-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        align-items: center;
+      }
+      .entry-bar {
+        height: 8px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, #7c3aed, #a78bfa);
+        animation: growIn 2s ease-out infinite;
+      }
+      @keyframes growIn {
+        0% {
+          width: 0%;
+          opacity: 0;
+        }
+        60% {
+          opacity: 1;
+        }
+        100% {
+          width: 100%;
+          opacity: 0.6;
+        }
+      }
+      .entry-label {
+        font-size: 8px;
+        color: #4c3d8a;
+        letter-spacing: 2px;
+        white-space: nowrap;
+        width: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ANIMATIONS & UX ENHANCEMENTS</h2>
+    <div class="sub">
+      REVISED DESIGN — NO GAME TERMINOLOGY · FULL MOTION DETAIL
+    </div>
+
+    <!-- NODE TRANSITION SEQUENCE -->
+    <div class="label">01 // Node-to-Node Transition Flow</div>
+    <div class="grid" style="margin-bottom: 28px">
+      <div class="sequence">
+        <div class="seq-step">
+          <div class="seq-num">1</div>
+          <div class="seq-line"></div>
+          <div class="seq-content">
+            <h4>HOVER NODE</h4>
+            <p>
+              Node ring expands 10%, connection line brightens, small orbiting
+              particle appears around the node, cursor changes to pointer.
+            </p>
+          </div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">2</div>
+          <div class="seq-line"></div>
+          <div class="seq-content">
+            <h4>CLICK — ENERGY BURST</h4>
+            <p>
+              Node flashes gold, a radial burst ripple expands outward from it,
+              connection lines all briefly glow then fade. Duration: 300ms.
+            </p>
+          </div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">3</div>
+          <div class="seq-line"></div>
+          <div class="seq-content">
+            <h4>MAP DIMS + PANEL RISES</h4>
+            <p>
+              Starmap fades to 20% opacity. Panel slides up from bottom with a
+              slight overshoot (spring easing). Background hex grid stays
+              faintly visible behind it.
+            </p>
+          </div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">4</div>
+          <div class="seq-line"></div>
+          <div class="seq-content">
+            <h4>CONTENT STAGGERS IN</h4>
+            <p>
+              Panel header appears first, then content items cascade in one by
+              one (60ms stagger). Feels like a HUD loading data.
+            </p>
+          </div>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">5</div>
+          <div class="seq-content">
+            <h4>NODE-TO-NODE (WHILE PANEL OPEN)</h4>
+            <p>
+              Old panel slides out (left or right based on node position). Map
+              briefly brightens, camera "drifts" toward new node, new panel
+              slides in. No full close needed — seamless jump.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="margin-bottom: 16px">
+          <div class="transition-demo">
+            <div class="mini-node">
+              <div class="mini-ring"><div class="mini-core"></div></div>
+              <div class="mini-label">SKILLS</div>
+            </div>
+            <div style="text-align: center">
+              <div style="color: #2d1b69; font-size: 11px; letter-spacing: 1px">
+                — — ▶ — —
+              </div>
+              <div
+                style="
+                  font-size: 8px;
+                  color: #3b1f6e;
+                  margin-top: 4px;
+                  letter-spacing: 2px;
+                "
+              >
+                DRIFT + SWAP
+              </div>
+            </div>
+            <div class="mini-node active">
+              <div class="mini-ring"><div class="mini-core"></div></div>
+              <div class="mini-label">PROJECTS</div>
+            </div>
+          </div>
+          <div class="transition-label">
+            ACTIVE NODE GLOWS GOLD WHILE PANEL IS OPEN
+          </div>
+        </div>
+
+        <div class="sequence">
+          <div class="label" style="margin-bottom: 12px">PANEL CLOSE</div>
+          <div class="seq-step">
+            <div class="seq-num">✕</div>
+            <div class="seq-line"></div>
+            <div class="seq-content">
+              <h4>ESC / CLICK OUTSIDE / CLOSE BTN</h4>
+              <p>
+                Panel slides back down. Map fades back to full opacity. Node
+                returns to idle pulsing state.
+              </p>
+            </div>
+          </div>
+          <div class="seq-step">
+            <div class="seq-num">⟳</div>
+            <div class="seq-content">
+              <h4>IDLE STATE RESUMES</h4>
+              <p>
+                All nodes resume their slow breathing glow. Particles continue
+                drifting. Hex grid pulses on mouse move.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ALWAYS-ON AMBIENT ANIMATIONS -->
+    <div class="label">02 // Always-On Ambient Animations</div>
+    <div class="grid-3" style="margin-bottom: 28px">
+      <div class="ux-card">
+        <div class="ux-icon">✦</div>
+        <h4>NODE BREATHING</h4>
+        <p>
+          All nodes slowly pulse their glow on a 3–4s sine cycle, each slightly
+          offset so they never pulse in sync — feels alive, not mechanical.
+        </p>
+      </div>
+      <div class="ux-card">
+        <div class="ux-icon">⟿</div>
+        <h4>FLOWING CONNECTIONS</h4>
+        <p>
+          Small bright dots travel along the dashed lines from center to each
+          node, like data signals. One dot per line, looping at different
+          speeds.
+        </p>
+      </div>
+      <div class="ux-card">
+        <div class="ux-icon">⬡</div>
+        <h4>HEX GRID MOUSE REACTION</h4>
+        <p>
+          Hexagons near the cursor glow slightly brighter. The effect radius
+          follows your mouse — like pressing a light through fabric.
+        </p>
+      </div>
+      <div class="ux-card">
+        <div class="ux-icon">·</div>
+        <h4>PARTICLE DRIFT</h4>
+        <p>
+          ~120 particles float slowly. Each has its own speed, direction, and
+          opacity cycle. No two move the same way.
+        </p>
+      </div>
+      <div class="ux-card">
+        <div class="ux-icon">↗</div>
+        <h4>CURSOR TRAIL</h4>
+        <p>
+          A 6–8 dot trail follows the cursor on the map — each dot fades in size
+          and opacity. Subtle but adds depth to interactions.
+        </p>
+      </div>
+      <div class="ux-card">
+        <div class="ux-icon">◎</div>
+        <h4>PAGE LOAD BOOT</h4>
+        <p>
+          On first visit: screen flickers on, nodes appear one by one,
+          connection lines draw themselves outward from center. Total: ~2s intro
+          sequence.
+        </p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PANEL UX DETAILS -->
+    <div class="label">03 // Panel UX Details</div>
+    <div class="grid" style="margin-bottom: 28px">
+      <div class="ux-card">
+        <h4>STAGGERED CONTENT ENTRY</h4>
+        <p style="margin-bottom: 10px">
+          Each piece of content in a panel animates in from below, one after
+          another:
+        </p>
+        <div class="entry-row">
+          <div class="entry-label">HEADER</div>
+          <div class="entry-bar" style="animation-delay: 0s"></div>
+        </div>
+        <div class="entry-row">
+          <div class="entry-label">SUBTITLE</div>
+          <div class="entry-bar" style="animation-delay: 0.3s"></div>
+        </div>
+        <div class="entry-row">
+          <div class="entry-label">CARD 1</div>
+          <div class="entry-bar" style="animation-delay: 0.6s"></div>
+        </div>
+        <div class="entry-row">
+          <div class="entry-label">CARD 2</div>
+          <div class="entry-bar" style="animation-delay: 0.9s"></div>
+        </div>
+        <div class="entry-row">
+          <div class="entry-label">CARD 3</div>
+          <div class="entry-bar" style="animation-delay: 1.2s"></div>
+        </div>
+      </div>
+      <div>
+        <div class="ux-card" style="margin-bottom: 12px">
+          <h4>REPO CARD HOVER</h4>
+          <p>
+            Cards lift 4px, border glows purple, a subtle gradient sweeps across
+            the card background. Tags animate a slight scale-up. Demo button
+            pulses once.
+          </p>
+        </div>
+        <div class="ux-card" style="margin-bottom: 12px">
+          <h4>DEMO MODAL</h4>
+          <p>
+            Clicking ▶ DEMO opens a full-screen modal with an iframe showing the
+            live project. Header shows repo name + live URL. "Open in new tab"
+            button. Glassmorphism-style backdrop blur.
+          </p>
+        </div>
+        <div class="ux-card">
+          <h4>SKILL TREE HOVER</h4>
+          <p>
+            Hovering a skill leaf shows a tooltip: skill name + "Used in:
+            [project names]". The branch above the hovered skill also brightens,
+            tracing the path up to root.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- NAMING CLEANUP -->
+    <div class="label">04 // Clean Naming — No Game Terms</div>
+    <table class="name-table">
+      <tr>
+        <th>REMOVED</th>
+        <th>REPLACED WITH</th>
+        <th>WHERE</th>
+      </tr>
+      <tr>
+        <td class="old">Khaydarin Crystal</td>
+        <td class="new">Violet / Light Purple</td>
+        <td class="reason">color palette labels</td>
+      </tr>
+      <tr>
+        <td class="old">Psionic Core / Field</td>
+        <td class="new">Glow / Energy</td>
+        <td class="reason">color & animation labels</td>
+      </tr>
+      <tr>
+        <td class="old">Nexus / Void / Deep Psionic</td>
+        <td class="new">Dark / Deep Purple / Background</td>
+        <td class="reason">internal token names only</td>
+      </tr>
+      <tr>
+        <td class="old">En Taro Adun</td>
+        <td class="new">(removed entirely)</td>
+        <td class="reason">was in one mockup only</td>
+      </tr>
+      <tr>
+        <td class="old">SYSTEMS ONLINE // STATUS</td>
+        <td class="new">Clean section headers</td>
+        <td class="reason">UI labels</td>
+      </tr>
+    </table>
+    <p class="note" style="margin-top: 14px">
+      The SC2 <span class="highlight">aesthetic</span> stays — geometric
+      hexagons, dark space background, glowing purple, geometric UI panels — but
+      all the copy is clean professional language: your name, your skills, your
+      projects. Nothing a recruiter would need to Google.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,410 @@
+<h2>Page Layout Structure</h2>
+<p class="subtitle">How should visitors navigate your portfolio?</p>
+
+<div class="cards">
+  <div class="card" data-choice="scroll" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: #0d0d1a;
+        padding: 16px;
+        min-height: 180px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      "
+    >
+      <!-- Sidebar nav -->
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding-top: 4px;
+        "
+      >
+        <div
+          style="
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #a78bfa;
+            box-shadow: 0 0 6px #a78bfa;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4c3d8a;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4c3d8a;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4c3d8a;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4c3d8a;
+          "
+        ></div>
+      </div>
+      <!-- Page sections stacked -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px">
+        <div
+          style="
+            background: linear-gradient(135deg, #1a0a2e, #2d1b69);
+            border: 1px solid #7c3aed;
+            padding: 10px;
+            border-radius: 4px;
+          "
+        >
+          <div style="color: #c4b5fd; font-size: 10px; letter-spacing: 2px">
+            HERO — FULL SCREEN
+          </div>
+        </div>
+        <div
+          style="
+            background: rgba(167, 139, 250, 0.05);
+            border: 1px solid #4c3d8a;
+            padding: 8px;
+            border-radius: 4px;
+          "
+        >
+          <div style="color: #7c6dad; font-size: 10px; letter-spacing: 2px">
+            ABOUT
+          </div>
+        </div>
+        <div
+          style="
+            background: rgba(167, 139, 250, 0.05);
+            border: 1px solid #4c3d8a;
+            padding: 8px;
+            border-radius: 4px;
+          "
+        >
+          <div style="color: #7c6dad; font-size: 10px; letter-spacing: 2px">
+            SKILLS
+          </div>
+        </div>
+        <div
+          style="
+            background: rgba(167, 139, 250, 0.05);
+            border: 1px solid #4c3d8a;
+            padding: 8px;
+            border-radius: 4px;
+          "
+        >
+          <div style="color: #7c6dad; font-size: 10px; letter-spacing: 2px">
+            PROJECTS — GITHUB REPOS
+          </div>
+        </div>
+        <div
+          style="
+            background: rgba(167, 139, 250, 0.05);
+            border: 1px solid #4c3d8a;
+            padding: 8px;
+            border-radius: 4px;
+          "
+        >
+          <div style="color: #7c6dad; font-size: 10px; letter-spacing: 2px">
+            CONTACT
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Continuous Scroll</h3>
+      <p>
+        One long page, scroll down through all sections. Dot navigation on the
+        side shows position. Smooth, natural flow. Most common portfolio style —
+        works well with parallax animations.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="snap" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: #0d0d1a;
+        padding: 16px;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      "
+    >
+      <!-- Full viewport sections snapping -->
+      <div
+        style="
+          background: linear-gradient(135deg, #1a0a2e, #2d1b69);
+          border: 1px solid #a78bfa;
+          padding: 14px;
+          border-radius: 4px;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <div style="color: #c4b5fd; font-size: 10px; letter-spacing: 2px">
+          ◀ HERO — FULL VIEWPORT ▶
+        </div>
+        <div
+          style="
+            width: 20px;
+            height: 20px;
+            border: 1px solid #a78bfa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+          "
+        >
+          <div style="color: #a78bfa; font-size: 8px">↕</div>
+        </div>
+      </div>
+      <div
+        style="display: flex; justify-content: center; gap: 6px; padding: 4px"
+      >
+        <div
+          style="
+            width: 20px;
+            height: 4px;
+            background: #a78bfa;
+            border-radius: 2px;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 4px;
+            background: #4c3d8a;
+            border-radius: 2px;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 4px;
+            background: #4c3d8a;
+            border-radius: 2px;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 4px;
+            background: #4c3d8a;
+            border-radius: 2px;
+          "
+        ></div>
+        <div
+          style="
+            width: 6px;
+            height: 4px;
+            background: #4c3d8a;
+            border-radius: 2px;
+          "
+        ></div>
+      </div>
+      <div
+        style="
+          color: #6d5fa0;
+          font-size: 9px;
+          letter-spacing: 2px;
+          text-align: center;
+        "
+      >
+        SNAP-SCROLL — EACH SECTION = FULL SCREEN
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Snap-Scroll Sections</h3>
+      <p>
+        Each section snaps to fill the full screen — like a game menu or
+        starmap. Scroll snaps to the next "world." More immersive, dramatic.
+        Pairs perfectly with SC2-style entry animations per section.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="starmap" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: #0a0a14;
+        padding: 16px;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      "
+    >
+      <!-- Starmap nav concept -->
+      <div style="position: relative; width: 160px; height: 120px">
+        <!-- Connection lines -->
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 1px;
+            background: rgba(167, 139, 250, 0.3);
+            transform: rotate(-45deg);
+            transform-origin: left center;
+          "
+        ></div>
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 55px;
+            height: 1px;
+            background: rgba(167, 139, 250, 0.3);
+            transform: rotate(30deg);
+            transform-origin: left center;
+          "
+        ></div>
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 65px;
+            height: 1px;
+            background: rgba(167, 139, 250, 0.3);
+            transform: rotate(150deg);
+            transform-origin: left center;
+          "
+        ></div>
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 1px;
+            background: rgba(167, 139, 250, 0.3);
+            transform: rotate(250deg);
+            transform-origin: left center;
+          "
+        ></div>
+        <!-- Center node -->
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #7c3aed;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #a78bfa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <div
+            style="
+              width: 6px;
+              height: 6px;
+              background: #e9d5ff;
+              border-radius: 50%;
+            "
+          ></div>
+        </div>
+        <!-- Satellite nodes -->
+        <div
+          style="
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            font-size: 9px;
+            color: #a78bfa;
+            letter-spacing: 1px;
+          "
+        >
+          ABOUT
+        </div>
+        <div
+          style="
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 9px;
+            color: #a78bfa;
+            letter-spacing: 1px;
+          "
+        >
+          SKILLS
+        </div>
+        <div
+          style="
+            position: absolute;
+            bottom: 12px;
+            right: 4px;
+            font-size: 9px;
+            color: #a78bfa;
+            letter-spacing: 1px;
+          "
+        >
+          PROJECTS
+        </div>
+        <div
+          style="
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 9px;
+            color: #a78bfa;
+            letter-spacing: 1px;
+          "
+        >
+          CONTACT
+        </div>
+      </div>
+      <div
+        style="
+          color: #6d5fa0;
+          font-size: 9px;
+          letter-spacing: 2px;
+          margin-top: 8px;
+        "
+      >
+        CLICK TO NAVIGATE BETWEEN NODES
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Starmap Navigation</h3>
+      <p>
+        An SC2-style galaxy map as the main navigation — click nodes to jump to
+        sections. Ultra creative, totally unique. High effort, high reward.
+        Makes the portfolio itself feel like an interactive experience.
+      </p>
+    </div>
+  </div>
+</div>

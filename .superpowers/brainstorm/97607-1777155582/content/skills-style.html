@@ -1,0 +1,526 @@
+<h2>Skills Section Style</h2>
+<p class="subtitle">How should your tech stack be displayed?</p>
+
+<div class="cards">
+  <div class="card" data-choice="techtree" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: #080810;
+        padding: 16px;
+        min-height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div style="position: relative; width: 220px; height: 140px">
+        <!-- Root node -->
+        <div
+          style="
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid #7c3aed;
+            padding: 4px 10px;
+            border-radius: 3px;
+            color: #c4b5fd;
+            font-size: 9px;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            box-shadow: 0 0 8px rgba(124, 58, 237, 0.3);
+          "
+        >
+          FULL STACK
+        </div>
+        <!-- Lines down -->
+        <svg
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
+        >
+          <line
+            x1="50%"
+            y1="22px"
+            x2="20%"
+            y2="60px"
+            stroke="#4c3d8a"
+            stroke-width="0.8"
+          />
+          <line
+            x1="50%"
+            y1="22px"
+            x2="50%"
+            y2="60px"
+            stroke="#4c3d8a"
+            stroke-width="0.8"
+          />
+          <line
+            x1="50%"
+            y1="22px"
+            x2="80%"
+            y2="60px"
+            stroke="#4c3d8a"
+            stroke-width="0.8"
+          />
+          <line
+            x1="20%"
+            y1="78px"
+            x2="10%"
+            y2="110px"
+            stroke="#3b2d6a"
+            stroke-width="0.6"
+          />
+          <line
+            x1="20%"
+            y1="78px"
+            x2="30%"
+            y2="110px"
+            stroke="#3b2d6a"
+            stroke-width="0.6"
+          />
+          <line
+            x1="80%"
+            y1="78px"
+            x2="72%"
+            y2="110px"
+            stroke="#3b2d6a"
+            stroke-width="0.6"
+          />
+          <line
+            x1="80%"
+            y1="78px"
+            x2="90%"
+            y2="110px"
+            stroke="#3b2d6a"
+            stroke-width="0.6"
+          />
+        </svg>
+        <!-- Level 2 nodes -->
+        <div
+          style="
+            position: absolute;
+            left: 10%;
+            top: 55px;
+            transform: translateX(-50%);
+            background: rgba(76, 29, 149, 0.15);
+            border: 1px solid #6d28d9;
+            padding: 3px 7px;
+            border-radius: 3px;
+            color: #a78bfa;
+            font-size: 8px;
+            white-space: nowrap;
+          "
+        >
+          FRONTEND
+        </div>
+        <div
+          style="
+            position: absolute;
+            left: 50%;
+            top: 55px;
+            transform: translateX(-50%);
+            background: rgba(76, 29, 149, 0.15);
+            border: 1px solid #6d28d9;
+            padding: 3px 7px;
+            border-radius: 3px;
+            color: #a78bfa;
+            font-size: 8px;
+            white-space: nowrap;
+          "
+        >
+          AI / ML
+        </div>
+        <div
+          style="
+            position: absolute;
+            left: 82%;
+            top: 55px;
+            transform: translateX(-50%);
+            background: rgba(76, 29, 149, 0.15);
+            border: 1px solid #6d28d9;
+            padding: 3px 7px;
+            border-radius: 3px;
+            color: #a78bfa;
+            font-size: 8px;
+            white-space: nowrap;
+          "
+        >
+          BACKEND
+        </div>
+        <!-- Level 3 nodes -->
+        <div
+          style="
+            position: absolute;
+            left: 5%;
+            top: 105px;
+            transform: translateX(-50%);
+            background: rgba(55, 20, 100, 0.1);
+            border: 1px solid #4c3d8a;
+            padding: 2px 5px;
+            border-radius: 2px;
+            color: #7c6dad;
+            font-size: 7px;
+            white-space: nowrap;
+          "
+        >
+          React
+        </div>
+        <div
+          style="
+            position: absolute;
+            left: 25%;
+            top: 105px;
+            transform: translateX(-50%);
+            background: rgba(55, 20, 100, 0.1);
+            border: 1px solid #4c3d8a;
+            padding: 2px 5px;
+            border-radius: 2px;
+            color: #7c6dad;
+            font-size: 7px;
+            white-space: nowrap;
+          "
+        >
+          Next.js
+        </div>
+        <div
+          style="
+            position: absolute;
+            left: 72%;
+            top: 105px;
+            transform: translateX(-50%);
+            background: rgba(55, 20, 100, 0.1);
+            border: 1px solid #4c3d8a;
+            padding: 2px 5px;
+            border-radius: 2px;
+            color: #7c6dad;
+            font-size: 7px;
+            white-space: nowrap;
+          "
+        >
+          Node.js
+        </div>
+        <div
+          style="
+            position: absolute;
+            left: 92%;
+            top: 105px;
+            transform: translateX(-50%);
+            background: rgba(55, 20, 100, 0.1);
+            border: 1px solid #4c3d8a;
+            padding: 2px 5px;
+            border-radius: 2px;
+            color: #7c6dad;
+            font-size: 7px;
+            white-space: nowrap;
+          "
+        >
+          Python
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Protoss Research Tree</h3>
+      <p>
+        Skills as an unlocked tech tree — root categories branch into specific
+        techs. Hover to see proficiency glow. Feels exactly like the SC2 Protoss
+        upgrade panel. Unique, immersive, on-brand.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="icongrid" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: #080810;
+        padding: 16px;
+        min-height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 10px;
+          width: 200px;
+        "
+      >
+        <!-- Icon grid items -->
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 0 6px rgba(109, 40, 217, 0.3);
+            "
+          >
+            <span style="font-size: 14px">⚛</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >React</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">▲</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >Next</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #a78bfa;
+              border-radius: 6px;
+              background: rgba(167, 139, 250, 0.2);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+            "
+          >
+            <span style="font-size: 14px">🐍</span>
+          </div>
+          <span style="color: #a78bfa; font-size: 7px; letter-spacing: 1px"
+            >Python</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">⬡</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >Node</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">🤖</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >PyTorch</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">☁</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >AWS</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">🐘</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >Postgres</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #6d28d9;
+              border-radius: 6px;
+              background: rgba(109, 40, 217, 0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">🐳</span>
+          </div>
+          <span style="color: #7c6dad; font-size: 7px; letter-spacing: 1px"
+            >Docker</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #4c3d8a;
+              border-radius: 6px;
+              background: rgba(76, 29, 149, 0.1);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">TS</span>
+          </div>
+          <span style="color: #6d5fa0; font-size: 7px; letter-spacing: 1px"
+            >TypeScript</span
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              width: 30px;
+              height: 30px;
+              border: 1px solid #4c3d8a;
+              border-radius: 6px;
+              background: rgba(76, 29, 149, 0.1);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 14px">⚙</span>
+          </div>
+          <span style="color: #6d5fa0; font-size: 7px; letter-spacing: 1px"
+            >+more</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Glowing Icon Grid</h3>
+      <p>
+        Clean grid of tech icons, grouped by category. Each glows with psionic
+        energy. Familiar, scannable, industry-standard. Easier to read at a
+        glance for recruiters.
+      </p>
+    </div>
+  </div>
+</div>

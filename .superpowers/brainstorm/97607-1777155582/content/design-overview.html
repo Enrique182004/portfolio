@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Design — Enrique Calleros</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #060610;
+        color: #c4b5fd;
+        font-family: "Courier New", monospace;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── HEADER ── */
+      .header {
+        padding: 14px 28px;
+        border-bottom: 1px solid #1e1040;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(6, 6, 16, 0.95);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .header-label {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: #4c3d8a;
+      }
+      .header-title {
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #a78bfa;
+      }
+      .header-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #7c3aed;
+        box-shadow: 0 0 8px #7c3aed;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      /* ── SECTIONS ── */
+      .section {
+        padding: 40px 40px 30px;
+        border-bottom: 1px solid #0f0a20;
+      }
+      .section-label {
+        font-size: 9px;
+        letter-spacing: 4px;
+        color: #4c3d8a;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+      .section-title {
+        font-size: 18px;
+        color: #e9d5ff;
+        letter-spacing: 2px;
+        margin-bottom: 24px;
+      }
+
+      /* ── COLOR PALETTE ── */
+      .palette {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+      .swatch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .swatch-color {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        position: relative;
+      }
+      .swatch-name {
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: #6d5fa0;
+      }
+      .swatch-hex {
+        font-size: 8px;
+        color: #4c3d8a;
+      }
+
+      /* ── STARMAP MOCKUP ── */
+      .starmap-mock {
+        position: relative;
+        width: 100%;
+        height: 420px;
+        background: #070712;
+        border: 1px solid #1e1040;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      /* Hex grid background */
+      .starmap-mock svg.hex-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.25;
+      }
+      /* Particles */
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        animation: float linear infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px) translateX(0px);
+        }
+        33% {
+          transform: translateY(-8px) translateX(4px);
+        }
+        66% {
+          transform: translateY(4px) translateX(-6px);
+        }
+        100% {
+          transform: translateY(0px) translateX(0px);
+        }
+      }
+      /* Connection lines */
+      .starmap-mock svg.connections {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      /* Nodes */
+      .node {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transform: translate(-50%, -50%);
+      }
+      .node-ring {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1px solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: all 0.3s;
+      }
+      .node-ring::before {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid;
+        opacity: 0.4;
+      }
+      .node-core {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        position: relative;
+        z-index: 1;
+      }
+      .node-label {
+        font-size: 8px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      /* Hero node */
+      .node.hero {
+        left: 50%;
+        top: 50%;
+      }
+      .node.hero .node-ring {
+        width: 72px;
+        height: 72px;
+        border-color: #a78bfa;
+        box-shadow:
+          0 0 30px rgba(167, 139, 250, 0.3),
+          0 0 60px rgba(167, 139, 250, 0.1);
+        animation: heroGlow 3s ease-in-out infinite;
+      }
+      .node.hero .node-ring::before {
+        border-color: #a78bfa;
+        width: 54px;
+        height: 54px;
+      }
+      .node.hero .node-core {
+        background: #a78bfa;
+        box-shadow: 0 0 16px #a78bfa;
+        width: 20px;
+        height: 20px;
+      }
+      .node.hero .node-label {
+        color: #c4b5fd;
+        font-size: 10px;
+      }
+      @keyframes heroGlow {
+        0%,
+        100% {
+          box-shadow:
+            0 0 30px rgba(167, 139, 250, 0.3),
+            0 0 60px rgba(167, 139, 250, 0.1);
+        }
+        50% {
+          box-shadow:
+            0 0 40px rgba(167, 139, 250, 0.5),
+            0 0 80px rgba(167, 139, 250, 0.2);
+        }
+      }
+      /* Satellite nodes */
+      .node.about {
+        left: 22%;
+        top: 25%;
+      }
+      .node.skills {
+        left: 78%;
+        top: 25%;
+      }
+      .node.projects {
+        left: 18%;
+        top: 72%;
+      }
+      .node.ai {
+        left: 82%;
+        top: 72%;
+      }
+      .node.contact {
+        left: 50%;
+        top: 85%;
+      }
+      .node.satellite .node-ring {
+        border-color: #6d28d9;
+        box-shadow: 0 0 12px rgba(109, 40, 217, 0.3);
+      }
+      .node.satellite .node-ring::before {
+        border-color: #6d28d9;
+      }
+      .node.satellite .node-core {
+        background: #7c3aed;
+        box-shadow: 0 0 8px #7c3aed;
+      }
+      .node.satellite .node-label {
+        color: #a78bfa;
+      }
+
+      /* ── PANEL MOCKUP ── */
+      .panel-mock {
+        background: #09091a;
+        border: 1px solid #2d1b69;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .panel-header {
+        background: rgba(45, 27, 105, 0.4);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid #2d1b69;
+      }
+      .panel-header-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #a78bfa;
+        box-shadow: 0 0 6px #a78bfa;
+      }
+      .panel-header-title {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: #c4b5fd;
+      }
+      .panel-close {
+        margin-left: auto;
+        font-size: 10px;
+        color: #4c3d8a;
+        cursor: pointer;
+        letter-spacing: 1px;
+      }
+      .panel-body {
+        padding: 20px;
+      }
+
+      /* ── REPO CARDS ── */
+      .repo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .repo-card {
+        background: rgba(45, 27, 105, 0.08);
+        border: 1px solid #2d1b69;
+        border-radius: 4px;
+        padding: 14px;
+        position: relative;
+        transition: border-color 0.2s;
+      }
+      .repo-card:hover {
+        border-color: #7c3aed;
+      }
+      .repo-card-name {
+        font-size: 11px;
+        color: #c4b5fd;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .repo-card-desc {
+        font-size: 9px;
+        color: #6d5fa0;
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+      .repo-card-tags {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .tag {
+        font-size: 8px;
+        padding: 2px 6px;
+        background: rgba(124, 58, 237, 0.15);
+        border: 1px solid #4c3d8a;
+        color: #a78bfa;
+        border-radius: 2px;
+        letter-spacing: 1px;
+      }
+      .repo-card-actions {
+        display: flex;
+        gap: 6px;
+      }
+      .btn-demo {
+        font-size: 8px;
+        padding: 3px 10px;
+        background: rgba(124, 58, 237, 0.2);
+        border: 1px solid #7c3aed;
+        color: #c4b5fd;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 2px;
+        box-shadow: 0 0 6px rgba(124, 58, 237, 0.2);
+      }
+      .btn-code {
+        font-size: 8px;
+        padding: 3px 10px;
+        background: transparent;
+        border: 1px solid #2d1b69;
+        color: #6d5fa0;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 2px;
+      }
+      .demo-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 7px;
+        padding: 2px 5px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid #10b981;
+        color: #10b981;
+        letter-spacing: 1px;
+        border-radius: 2px;
+      }
+
+      /* ── RESEARCH TREE TEASER ── */
+      .tree-preview {
+        background: #07070f;
+        border: 1px solid #1a0a30;
+        border-radius: 4px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .tree-row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: center;
+      }
+      .tree-node {
+        padding: 5px 14px;
+        border: 1px solid;
+        border-radius: 3px;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-align: center;
+        position: relative;
+      }
+      .tree-node.root {
+        border-color: #a78bfa;
+        color: #e9d5ff;
+        background: rgba(167, 139, 250, 0.1);
+        box-shadow: 0 0 10px rgba(167, 139, 250, 0.2);
+      }
+      .tree-node.branch {
+        border-color: #6d28d9;
+        color: #c4b5fd;
+        background: rgba(109, 40, 217, 0.08);
+      }
+      .tree-node.leaf {
+        border-color: #3b1f6e;
+        color: #7c6dad;
+        background: rgba(59, 31, 110, 0.06);
+        font-size: 8px;
+      }
+      .tree-connector {
+        width: 1px;
+        height: 14px;
+        background: linear-gradient(to bottom, #4c3d8a, #2d1b69);
+      }
+      .tree-h-line {
+        height: 1px;
+        background: #2d1b69;
+        flex: 1;
+        max-width: 120px;
+      }
+
+      /* ── TYPOGRAPHY ── */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .note {
+        font-size: 10px;
+        color: #4c3d8a;
+        line-height: 1.7;
+        letter-spacing: 0.5px;
+      }
+      .highlight {
+        color: #a78bfa;
+      }
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #1e1040, transparent);
+        margin: 8px 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-label">PORTFOLIO DESIGN SPEC</div>
+      <div class="header-title">ENRIQUE CALLEROS</div>
+      <div class="header-dot"></div>
+    </div>
+
+    <!-- SECTION 1: COLOR PALETTE -->
+    <div class="section">
+      <div class="section-label">01 // Visual Language</div>
+      <div class="section-title">COLOR PALETTE & TYPOGRAPHY</div>
+      <div class="palette">
+        <div class="swatch">
+          <div
+            class="swatch-color"
+            style="background: #060610; box-shadow: inset 0 0 0 1px #1e1040"
+          ></div>
+          <div class="swatch-name">VOID</div>
+          <div class="swatch-hex">#060610</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #1a0a2e"></div>
+          <div class="swatch-name">DEEP PSIONIC</div>
+          <div class="swatch-hex">#1a0a2e</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #2d1b69"></div>
+          <div class="swatch-name">NEXUS</div>
+          <div class="swatch-hex">#2d1b69</div>
+        </div>
+        <div class="swatch">
+          <div
+            class="swatch-color"
+            style="
+              background: #7c3aed;
+              box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+            "
+          ></div>
+          <div class="swatch-name">PSIONIC CORE</div>
+          <div class="swatch-hex">#7c3aed</div>
+        </div>
+        <div class="swatch">
+          <div
+            class="swatch-color"
+            style="
+              background: #a78bfa;
+              box-shadow: 0 0 14px rgba(167, 139, 250, 0.6);
+            "
+          ></div>
+          <div class="swatch-name">KHAYDARIN</div>
+          <div class="swatch-hex">#a78bfa</div>
+        </div>
+        <div class="swatch">
+          <div
+            class="swatch-color"
+            style="
+              background: #e9d5ff;
+              box-shadow: 0 0 10px rgba(233, 213, 255, 0.3);
+            "
+          ></div>
+          <div class="swatch-name">CRYSTAL</div>
+          <div class="swatch-hex">#e9d5ff</div>
+        </div>
+        <div class="swatch">
+          <div
+            class="swatch-color"
+            style="
+              background: #f0b429;
+              box-shadow: 0 0 10px rgba(240, 180, 41, 0.4);
+            "
+          ></div>
+          <div class="swatch-name">GOLD ACCENT</div>
+          <div class="swatch-hex">#f0b429</div>
+        </div>
+        <div class="swatch">
+          <div
+            class="swatch-color"
+            style="
+              background: #10b981;
+              box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+            "
+          ></div>
+          <div class="swatch-name">LIVE / ONLINE</div>
+          <div class="swatch-hex">#10b981</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <p class="note">
+        Font: <span class="highlight">Space Mono</span> (headings + labels) +
+        <span class="highlight">Inter</span> (body). SC2 uses monospace for its
+        HUD text — same vibe. Letter-spacing pushed wide on labels for that
+        command-center feel.
+      </p>
+    </div>
+
+    <!-- SECTION 2: STARMAP -->
+    <div class="section">
+      <div class="section-label">02 // Navigation</div>
+      <div class="section-title">THE GALAXY STARMAP</div>
+      <div class="starmap-mock">
+        <!-- Hex grid SVG -->
+        <svg class="hex-bg">
+          <defs>
+            <pattern
+              id="hex"
+              x="0"
+              y="0"
+              width="52"
+              height="60"
+              patternUnits="userSpaceOnUse"
+            >
+              <polygon
+                points="26,2 50,15 50,45 26,58 2,45 2,15"
+                fill="none"
+                stroke="#2d1b69"
+                stroke-width="0.6"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hex)" />
+        </svg>
+
+        <!-- Particles -->
+        <div
+          class="particle"
+          style="
+            left: 10%;
+            top: 15%;
+            width: 3px;
+            height: 3px;
+            background: #a78bfa;
+            box-shadow: 0 0 6px #a78bfa;
+            animation-duration: 7s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 25%;
+            top: 60%;
+            width: 2px;
+            height: 2px;
+            background: #7c3aed;
+            box-shadow: 0 0 4px #7c3aed;
+            animation-duration: 9s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 60%;
+            top: 20%;
+            width: 3px;
+            height: 3px;
+            background: #c4b5fd;
+            box-shadow: 0 0 5px #c4b5fd;
+            animation-duration: 11s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 75%;
+            top: 55%;
+            width: 2px;
+            height: 2px;
+            background: #a78bfa;
+            box-shadow: 0 0 4px #a78bfa;
+            animation-duration: 8s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 40%;
+            top: 80%;
+            width: 2px;
+            height: 2px;
+            background: #7c3aed;
+            box-shadow: 0 0 3px #7c3aed;
+            animation-duration: 13s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 85%;
+            top: 30%;
+            width: 3px;
+            height: 3px;
+            background: #c4b5fd;
+            box-shadow: 0 0 6px #c4b5fd;
+            animation-duration: 6s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 5%;
+            top: 45%;
+            width: 2px;
+            height: 2px;
+            background: #a78bfa;
+            box-shadow: 0 0 4px #a78bfa;
+            animation-duration: 10s;
+          "
+        ></div>
+        <div
+          class="particle"
+          style="
+            left: 90%;
+            top: 70%;
+            width: 2px;
+            height: 2px;
+            background: #7c3aed;
+            box-shadow: 0 0 3px #7c3aed;
+            animation-duration: 12s;
+          "
+        ></div>
+
+        <!-- Connection lines SVG -->
+        <svg class="connections">
+          <!-- Hero to About -->
+          <line
+            x1="50%"
+            y1="50%"
+            x2="22%"
+            y2="25%"
+            stroke="#2d1b69"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+            opacity="0.6"
+          />
+          <!-- Hero to Skills -->
+          <line
+            x1="50%"
+            y1="50%"
+            x2="78%"
+            y2="25%"
+            stroke="#2d1b69"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+            opacity="0.6"
+          />
+          <!-- Hero to Projects -->
+          <line
+            x1="50%"
+            y1="50%"
+            x2="18%"
+            y2="72%"
+            stroke="#2d1b69"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+            opacity="0.6"
+          />
+          <!-- Hero to AI -->
+          <line
+            x1="50%"
+            y1="50%"
+            x2="82%"
+            y2="72%"
+            stroke="#2d1b69"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+            opacity="0.6"
+          />
+          <!-- Hero to Contact -->
+          <line
+            x1="50%"
+            y1="50%"
+            x2="50%"
+            y2="85%"
+            stroke="#2d1b69"
+            stroke-width="1"
+            stroke-dasharray="4 4"
+            opacity="0.6"
+          />
+          <!-- Glowing center beam effect -->
+          <radialGradient id="glow" cx="50%" cy="50%" r="30%">
+            <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="transparent" stop-opacity="0" />
+          </radialGradient>
+          <rect width="100%" height="100%" fill="url(#glow)" />
+        </svg>
+
+        <!-- HERO Node -->
+        <div class="node hero">
+          <div class="node-ring"><div class="node-core"></div></div>
+          <div class="node-label">ENRIQUE CALLEROS</div>
+        </div>
+
+        <!-- Satellite nodes -->
+        <div class="node satellite about">
+          <div class="node-ring"><div class="node-core"></div></div>
+          <div class="node-label">ABOUT</div>
+        </div>
+        <div class="node satellite skills">
+          <div class="node-ring"><div class="node-core"></div></div>
+          <div class="node-label">SKILLS</div>
+        </div>
+        <div class="node satellite projects">
+          <div class="node-ring"><div class="node-core"></div></div>
+          <div class="node-label">PROJECTS</div>
+        </div>
+        <div class="node satellite ai">
+          <div class="node-ring"><div class="node-core"></div></div>
+          <div class="node-label">AI / ML</div>
+        </div>
+        <div class="node satellite contact">
+          <div class="node-ring"><div class="node-core"></div></div>
+          <div class="node-label">CONTACT</div>
+        </div>
+
+        <!-- Bottom label -->
+        <div
+          style="
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8px;
+            letter-spacing: 3px;
+            color: #2d1b69;
+          "
+        >
+          CLICK A NODE TO ENTER — ANIMATED ENTRY PER SECTION
+        </div>
+      </div>
+      <div class="divider"></div>
+      <p class="note">
+        The starmap IS the home page. It fills the full viewport. Clicking a
+        node causes a <span class="highlight">GSAP-animated panel</span> to rise
+        from the bottom (or slide in from the side), covering ~80% of the
+        screen, while the starmap dims behind it. The selected node pulses gold.
+        Clicking outside or pressing ESC closes the panel and returns to the
+        map.
+      </p>
+    </div>
+
+    <!-- SECTION 3: PROJECTS PANEL -->
+    <div class="section">
+      <div class="section-label">03 // Projects Node</div>
+      <div class="section-title">GITHUB REPOS PANEL</div>
+      <div class="panel-mock">
+        <div class="panel-header">
+          <div class="panel-header-dot"></div>
+          <div class="panel-header-title">
+            ⬡ &nbsp; PROJECTS — GITHUB/ENRIQUE182004
+          </div>
+          <div class="panel-close">[ ESC TO CLOSE ]</div>
+        </div>
+        <div class="panel-body">
+          <div class="repo-grid">
+            <div class="repo-card">
+              <div class="demo-badge">LIVE</div>
+              <div class="repo-card-name">portfolio</div>
+              <div class="repo-card-desc">
+                Personal portfolio site with SC2-inspired Protoss design and
+                starmap navigation.
+              </div>
+              <div class="repo-card-tags">
+                <span class="tag">Next.js</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Canvas</span>
+              </div>
+              <div class="repo-card-actions">
+                <button class="btn-demo">▶ DEMO</button>
+                <button class="btn-code">⌥ CODE</button>
+              </div>
+            </div>
+            <div class="repo-card">
+              <div class="repo-card-name">vanGogh-ml</div>
+              <div class="repo-card-desc">
+                Style transfer model applying Van Gogh painting aesthetics to
+                images using CNNs.
+              </div>
+              <div class="repo-card-tags">
+                <span class="tag">Python</span>
+                <span class="tag">PyTorch</span>
+              </div>
+              <div class="repo-card-actions">
+                <button class="btn-code">⌥ CODE</button>
+              </div>
+            </div>
+            <div class="repo-card">
+              <div class="demo-badge">LIVE</div>
+              <div class="repo-card-name">crawler</div>
+              <div class="repo-card-desc">
+                Web crawler and data pipeline with REST API for indexing and
+                querying results.
+              </div>
+              <div class="repo-card-tags">
+                <span class="tag">Python</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Docker</span>
+              </div>
+              <div class="repo-card-actions">
+                <button class="btn-demo">▶ DEMO</button>
+                <button class="btn-code">⌥ CODE</button>
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              margin-top: 14px;
+              font-size: 9px;
+              letter-spacing: 2px;
+              color: #4c3d8a;
+              text-align: center;
+            "
+          >
+            — FETCHED LIVE FROM GITHUB API · SORTED BY LAST UPDATED —
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <p class="note">
+        Repos with a
+        <span class="highlight" style="color: #10b981">LIVE</span> badge have a
+        live demo URL (GitHub Pages or deployed). Clicking
+        <span class="highlight">▶ DEMO</span> opens a modal with an iframe
+        preview + full-screen link. Repos without a live URL just show
+        <span class="highlight">⌥ CODE</span> which links to GitHub.
+      </p>
+    </div>
+
+    <!-- SECTION 4: RESEARCH TREE -->
+    <div class="section">
+      <div class="section-label">04 // Skills Node</div>
+      <div class="section-title">PROTOSS RESEARCH TREE</div>
+      <div class="tree-preview">
+        <div class="tree-row">
+          <div class="tree-node root">⬡ &nbsp; ENRIQUE CALLEROS</div>
+        </div>
+        <div class="tree-row"><div class="tree-connector"></div></div>
+        <div class="tree-row" style="gap: 60px">
+          <div class="tree-node branch">FRONTEND</div>
+          <div class="tree-node branch">BACKEND</div>
+          <div class="tree-node branch">AI / ML</div>
+        </div>
+        <div class="tree-row"><div class="tree-connector"></div></div>
+        <div
+          class="tree-row"
+          style="gap: 10px; flex-wrap: wrap; max-width: 600px"
+        >
+          <div class="tree-node leaf">React</div>
+          <div class="tree-node leaf">Next.js</div>
+          <div class="tree-node leaf">D3.js</div>
+          <div
+            class="tree-node leaf"
+            style="color: #4c3d8a; border-color: #1a0a30"
+          >
+            ···
+          </div>
+          <div class="tree-node leaf">Node.js</div>
+          <div class="tree-node leaf">FastAPI</div>
+          <div class="tree-node leaf">Flask</div>
+          <div
+            class="tree-node leaf"
+            style="color: #4c3d8a; border-color: #1a0a30"
+          >
+            ···
+          </div>
+          <div class="tree-node leaf">PyTorch</div>
+          <div class="tree-node leaf">scikit-learn</div>
+          <div class="tree-node leaf">XGBoost</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <p class="note">
+        Branches: <span class="highlight">Frontend</span>,
+        <span class="highlight">Backend</span>,
+        <span class="highlight">AI / ML</span>,
+        <span class="highlight">Tools</span>. Each leaf node glows brighter
+        based on proficiency. Hovering a leaf shows a tooltip with context
+        ("Used in X project"). The tree animates in node-by-node on panel open.
+      </p>
+    </div>
+
+    <!-- SECTION 5: TECH STACK -->
+    <div class="section">
+      <div class="section-label">05 // Implementation</div>
+      <div class="section-title">TECH STACK</div>
+      <div class="two-col">
+        <div>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Framework:</span> Next.js 14 (App Router) +
+            TypeScript
+          </p>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Styling:</span> Tailwind CSS + CSS custom
+            properties for the design tokens
+          </p>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Animations:</span> GSAP (panel transitions,
+            node entry) + CSS animations (particles, hex pulses)
+          </p>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Starmap:</span> HTML5 Canvas 2D — hex grid
+            drawn procedurally, particles managed in a render loop
+          </p>
+          <p class="note">
+            <span class="highlight">GitHub Data:</span> GitHub REST API v3 —
+            fetched server-side in Next.js, cached with ISR (revalidate every
+            hour)
+          </p>
+        </div>
+        <div>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Fonts:</span> Space Mono (Google Fonts) +
+            Inter
+          </p>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Deployment:</span> Vercel (auto-deploys from
+            GitHub main branch)
+          </p>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">GitHub Pages:</span> The portfolio itself
+            can be hosted on GitHub Pages via
+            <code style="color: #a78bfa">gh-pages</code> — making it your
+            github.io page
+          </p>
+          <p class="note" style="margin-bottom: 12px">
+            <span class="highlight">Demo Previews:</span> iframe modal for repos
+            with live URLs, sandboxed
+          </p>
+          <p class="note">
+            <span class="highlight">No DB needed</span> — all data from GitHub
+            API + static content
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

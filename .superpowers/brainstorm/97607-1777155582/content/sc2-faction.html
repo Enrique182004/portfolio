@@ -1,0 +1,264 @@
+<h2>SC2-Inspired Design Direction</h2>
+<p class="subtitle">
+  Each SC2 faction has a distinct visual language — which resonates most with
+  you?
+</p>
+
+<div class="cards">
+  <div class="card" data-choice="terran" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 40%,
+          #0f3460 100%
+        );
+        padding: 24px;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-family: monospace;
+      "
+    >
+      <div style="display: flex; gap: 6px; margin-bottom: 12px">
+        <div
+          style="
+            width: 10px;
+            height: 10px;
+            background: #e94560;
+            border-radius: 50%;
+          "
+        ></div>
+        <div
+          style="
+            width: 10px;
+            height: 10px;
+            background: #f5a623;
+            border-radius: 50%;
+          "
+        ></div>
+        <div
+          style="
+            width: 10px;
+            height: 10px;
+            background: #7ed321;
+            border-radius: 50%;
+          "
+        ></div>
+      </div>
+      <div
+        style="
+          border: 1px solid #4a7eb5;
+          padding: 12px;
+          background: rgba(74, 126, 181, 0.08);
+        "
+      >
+        <div
+          style="
+            color: #4a9eff;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+          "
+        >
+          SYSTEMS ONLINE // STATUS: ACTIVE
+        </div>
+        <div style="color: #c0d4e4; font-size: 13px; line-height: 1.6">
+          <span style="color: #4a9eff">&gt;</span> Eduardo Calleros<br />
+          <span style="color: #4a9eff">&gt;</span> Full Stack Engineer<br />
+          <span style="color: #888; font-size: 11px">▌</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 12px">
+        <div style="height: 3px; flex: 1; background: #e94560"></div>
+        <div style="height: 3px; flex: 2; background: #4a7eb5"></div>
+        <div style="height: 3px; flex: 1; background: #e94560"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Terran — Industrial Command</h3>
+      <p>
+        Dark blues, military greens, amber warnings. CRT scanlines, terminal
+        prompts, angular UI panels. Feels like a battle station — gritty,
+        functional, techy. Think: command center HUDs, bunker interfaces,
+        warning indicators.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="protoss" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: linear-gradient(
+          135deg,
+          #0d0d1a 0%,
+          #1a0a2e 50%,
+          #2d1b69 100%
+        );
+        padding: 24px;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      "
+    >
+      <div style="text-align: center; padding: 16px">
+        <div
+          style="
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 12px;
+            border: 2px solid #a78bfa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+              0 0 20px rgba(167, 139, 250, 0.4),
+              inset 0 0 20px rgba(167, 139, 250, 0.1);
+          "
+        >
+          <div
+            style="
+              width: 20px;
+              height: 20px;
+              background: #a78bfa;
+              border-radius: 50%;
+              box-shadow: 0 0 10px #a78bfa;
+            "
+          ></div>
+        </div>
+        <div
+          style="
+            color: #c4b5fd;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+          "
+        >
+          En Taro Adun
+        </div>
+        <div
+          style="
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              #a78bfa,
+              transparent
+            );
+            margin: 10px auto;
+          "
+        ></div>
+        <div style="color: #7c3aed; font-size: 11px; letter-spacing: 2px">
+          ⬡ &nbsp; ⬡ &nbsp; ⬡
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Protoss — Ancient Technology</h3>
+      <p>
+        Deep purples, gold accents, glowing psionic blue. Geometric hexagons,
+        crystalline shapes, ethereal glow effects. Feels advanced, mysterious,
+        elegant. Think: holographic interfaces, energy fields, sacred geometry.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div
+      class="card-image"
+      style="
+        background: linear-gradient(
+          135deg,
+          #0a0a0f 0%,
+          #0d1117 50%,
+          #111827 100%
+        );
+        padding: 24px;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      "
+    >
+      <div style="display: flex; gap: 16px; align-items: center">
+        <div style="text-align: center">
+          <div
+            style="
+              color: #3b82f6;
+              font-size: 10px;
+              letter-spacing: 3px;
+              margin-bottom: 8px;
+            "
+          >
+            TERRAN
+          </div>
+          <div
+            style="
+              border: 1px solid #3b82f6;
+              padding: 8px 12px;
+              color: #60a5fa;
+              font-size: 11px;
+              font-family: monospace;
+            "
+          >
+            SYS_01
+          </div>
+        </div>
+        <div style="color: #10b981; font-size: 18px">⟷</div>
+        <div style="text-align: center">
+          <div
+            style="
+              color: #8b5cf6;
+              font-size: 10px;
+              letter-spacing: 3px;
+              margin-bottom: 8px;
+            "
+          >
+            PROTOSS
+          </div>
+          <div
+            style="
+              border: 1px solid #8b5cf6;
+              padding: 8px 12px;
+              color: #a78bfa;
+              font-size: 11px;
+              border-radius: 4px;
+              box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+            "
+          >
+            ⬡ PSI
+          </div>
+        </div>
+      </div>
+      <div
+        style="
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+          margin-top: 8px;
+        "
+      ></div>
+      <div style="color: #10b981; font-size: 10px; letter-spacing: 2px">
+        FUSION INTERFACE ACTIVE
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Hybrid — Sci-Fi Command Bridge</h3>
+      <p>
+        Dark theme, glowing edges, particle effects. Mix of angular command
+        panels AND elegant glows. Feels premium and unique. Think: a futuristic
+        control room that blends both worlds into a cohesive dark sci-fi
+        aesthetic.
+      </p>
+    </div>
+  </div>
+</div>
