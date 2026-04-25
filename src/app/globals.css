@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-border: var(--border);
+  --color-purple-core: var(--purple-core);
+  --color-purple-light: var(--purple-light);
+  --color-text-bright: var(--text-bright);
+  --color-text-muted: var(--text-muted);
+  --color-gold: var(--gold);
+  --color-green: var(--green);
+  --font-family-mono: var(--font-space-mono), "Courier New", monospace;
+  --font-family-body: var(--font-inter), system-ui, sans-serif;
+}
+
 :root {
   --bg: #060610;
   --bg-deep: #1a0a2e;
