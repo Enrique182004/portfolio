@@ -1,77 +1,106 @@
 "use client";
 
-import { useEffect, useRef, MutableRefObject } from "react";
+import { useEffect, useRef, RefObject, MutableRefObject } from "react";
 import gsap from "gsap";
-import { NodeId } from "@/types/node";
-import { CanvasState } from "@/components/StarMap/starmap.types";
+import { NodeId, NodeConfig } from "@/types/node";
 
 interface UsePanelOptions {
   activeNodeId: NodeId | null;
-  panelRef: React.RefObject<HTMLDivElement | null>;
-  canvasStateRef: MutableRefObject<CanvasState>;
+  nodeConfigs: NodeConfig[];
+  zoomRef: RefObject<HTMLDivElement | null>;
+  panelRef: RefObject<HTMLDivElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   onCloseComplete: () => void;
 }
 
 export function usePanel({
   activeNodeId,
+  nodeConfigs,
+  zoomRef,
   panelRef,
-  canvasStateRef,
+  canvasRef,
   onCloseComplete,
 }: UsePanelOptions) {
   const prevNodeIdRef = useRef<NodeId | null>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    const zoom = zoomRef.current;
     const panel = panelRef.current;
-    if (!panel) return;
-    const prev = prevNodeIdRef.current;
+    const canvas = canvasRef.current;
+    if (!zoom || !panel) return;
 
+    const prev = prevNodeIdRef.current;
     if (tlRef.current) tlRef.current.kill();
 
     if (activeNodeId && !prev) {
-      // Open from closed
-      gsap.set(panel, { display: "flex", y: "100%", x: "0%" });
+      // --- Travel to node ---
+      const node = nodeConfigs.find((n) => n.id === activeNodeId);
+      if (node && canvas) {
+        const ox = node.xRatio * canvas.width;
+        const oy = node.yRatio * canvas.height;
+        zoom.style.transformOrigin = `${ox}px ${oy}px`;
+      }
+
+      gsap.set(panel, { display: "flex", opacity: 0 });
+
       const tl = gsap.timeline();
-      tl.to(
-        canvasStateRef.current,
-        { globalAlpha: 0.2, duration: 0.35, ease: "power2.out" },
-        0,
+      // Zoom canvas toward node
+      tl.fromTo(
+        zoom,
+        { scale: 1, opacity: 1 },
+        { scale: 6, duration: 0.9, ease: "power3.in" },
       );
-      tl.to(panel, { y: "0%", duration: 0.45, ease: "back.out(1.2)" }, 0.1);
+      // Fade out canvas as we arrive
+      tl.to(zoom, { opacity: 0, duration: 0.2 }, 0.72);
+      // Fade in panel content
+      tl.to(panel, { opacity: 1, duration: 0.35, ease: "power2.out" }, 0.85);
       tlRef.current = tl;
     } else if (!activeNodeId && prev) {
-      // Close
+      // --- Return to starmap ---
       const tl = gsap.timeline({
         onComplete: () => {
+          // Reset zoom state while canvas is invisible
+          gsap.set(zoom, { scale: 1, opacity: 0 });
+          zoom.style.transformOrigin = "center center";
           gsap.set(panel, { display: "none" });
+          // Fade canvas back in
+          gsap.to(zoom, { opacity: 1, duration: 0.5, ease: "power2.out" });
           onCloseComplete();
         },
       });
-      tl.to(panel, { y: "100%", duration: 0.35, ease: "power2.in" });
-      tl.to(
-        canvasStateRef.current,
-        { globalAlpha: 1, duration: 0.4, ease: "power2.out" },
-        0.1,
-      );
+      tl.to(panel, { opacity: 0, duration: 0.3, ease: "power2.in" });
       tlRef.current = tl;
     } else if (activeNodeId && prev && activeNodeId !== prev) {
-      // Node-to-node swap — slide direction based on string ordering
-      const slideOut = prev < activeNodeId ? "-120%" : "120%";
-      const slideIn = prev < activeNodeId ? "120%" : "-120%";
-
+      // --- Jump between nodes ---
+      const node = nodeConfigs.find((n) => n.id === activeNodeId);
       const tl = gsap.timeline();
-      tl.to(panel, { x: slideOut, duration: 0.25, ease: "power2.in" });
-      tl.to(
-        canvasStateRef.current,
-        { globalAlpha: 0.35, duration: 0.15 },
-        0.05,
-      );
-      tl.to(canvasStateRef.current, { globalAlpha: 0.2, duration: 0.15 }, 0.2);
-      tl.set(panel, { x: slideIn });
-      tl.to(panel, { x: "0%", duration: 0.35, ease: "back.out(1.1)" });
+
+      // Fade out current content
+      tl.to(panel, { opacity: 0, duration: 0.2, ease: "power2.in" });
+
+      // Briefly show canvas zoomed to new node
+      tl.call(() => {
+        if (node && canvas) {
+          const ox = node.xRatio * canvas.width;
+          const oy = node.yRatio * canvas.height;
+          zoom.style.transformOrigin = `${ox}px ${oy}px`;
+        }
+        gsap.set(zoom, { scale: 6, opacity: 0 });
+      });
+
+      // Fade in new content
+      tl.to(panel, { opacity: 1, duration: 0.3, ease: "power2.out" }, "+=0.05");
       tlRef.current = tl;
     }
 
     prevNodeIdRef.current = activeNodeId;
-  }, [activeNodeId, panelRef, canvasStateRef, onCloseComplete]);
+  }, [
+    activeNodeId,
+    nodeConfigs,
+    zoomRef,
+    panelRef,
+    canvasRef,
+    onCloseComplete,
+  ]);
 }

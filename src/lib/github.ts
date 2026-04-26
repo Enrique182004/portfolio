@@ -14,6 +14,8 @@ const AI_ML_KEYWORDS = [
   "learn",
 ];
 
+const GITHUB_OWNER = "Enrique182004";
+
 interface RawRepo {
   id: number;
   name: string;
@@ -25,6 +27,7 @@ interface RawRepo {
   updated_at: string;
   topics: string[];
   private: boolean;
+  has_pages: boolean;
 }
 
 export function isAiMlRepo(r: {
@@ -38,17 +41,22 @@ export function isAiMlRepo(r: {
 }
 
 export function mapRawRepo(r: RawRepo): Repo {
+  const liveUrl =
+    r.homepage ||
+    (r.has_pages
+      ? `https://${GITHUB_OWNER.toLowerCase()}.github.io/${r.name}`
+      : null);
   return {
     id: r.id,
     name: r.name,
     description: r.description,
     html_url: r.html_url,
-    homepage: r.homepage || null,
+    homepage: liveUrl,
     language: r.language,
     stargazers_count: r.stargazers_count,
     updated_at: r.updated_at,
     topics: r.topics ?? [],
-    isLive: Boolean(r.homepage),
+    isLive: Boolean(liveUrl),
     isAiMl: isAiMlRepo(r),
   };
 }

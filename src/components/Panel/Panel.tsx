@@ -1,145 +1,108 @@
 "use client";
 
-import {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  MutableRefObject,
-} from "react";
+import { MutableRefObject, RefObject } from "react";
 import { NodeId } from "@/types/node";
 import { CanvasState } from "@/components/StarMap/starmap.types";
-import { usePanel } from "./use-panel";
 
 interface PanelProps {
+  panelRef: RefObject<HTMLDivElement | null>;
   activeNodeId: NodeId | null;
+  displayedNodeId: NodeId | null;
   onClose: () => void;
   canvasStateRef: MutableRefObject<CanvasState>;
   children: React.ReactNode;
 }
 
+const LABELS: Record<NodeId, string> = {
+  hero: "Home",
+  about: "About",
+  skills: "Skills",
+  projects: "Projects",
+  "ai-ml": "AI / ML",
+  contact: "Contact",
+};
+
 export default function Panel({
-  activeNodeId,
+  panelRef,
+  displayedNodeId,
   onClose,
-  canvasStateRef,
   children,
 }: PanelProps) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const [displayedNodeId, setDisplayedNodeId] = useState<NodeId | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    if (activeNodeId) {
-      setDisplayedNodeId(activeNodeId);
-      setIsVisible(true);
-    }
-  }, [activeNodeId]);
-
-  const onCloseComplete = useCallback(() => {
-    setIsVisible(false);
-    setDisplayedNodeId(null);
-  }, []);
-
-  usePanel({ activeNodeId, panelRef, canvasStateRef, onCloseComplete });
-
-  if (!isVisible && !activeNodeId) return null;
-
-  const LABELS: Record<NodeId, string> = {
-    hero: "Home",
-    about: "About",
-    skills: "Skills",
-    projects: "Projects",
-    "ai-ml": "AI / ML",
-    contact: "Contact",
-  };
-
   return (
-    <>
-      {/* Backdrop */}
+    <div
+      ref={panelRef}
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "var(--bg)",
+        zIndex: 20,
+        display: "none",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header */}
       <div
-        onClick={onClose}
         style={{
-          position: "fixed",
-          inset: 0,
-          background: "transparent",
-          zIndex: 10,
-          display: isVisible ? "block" : "none",
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          padding: "16px 28px",
+          borderBottom: "1px solid var(--border)",
+          flexShrink: 0,
         }}
-      />
-      <div
-        ref={panelRef}
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: "5%",
-          right: "5%",
-          height: "78vh",
-          background: "rgba(9, 9, 26, 0.96)",
-          backdropFilter: "blur(12px)",
-          borderTop: "1px solid var(--purple-core)",
-          borderLeft: "1px solid var(--border)",
-          borderRight: "1px solid var(--border)",
-          borderRadius: "8px 8px 0 0",
-          zIndex: 20,
-          display: "none",
-          flexDirection: "column",
-          overflow: "hidden",
-        }}
-        onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div
+        <button
+          onClick={onClose}
           style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            padding: "12px 24px",
-            borderBottom: "1px solid var(--border)",
-            flexShrink: 0,
+            background: "none",
+            border: "1px solid var(--border)",
+            color: "var(--text-muted)",
+            fontFamily: "var(--font-mono)",
+            fontSize: 9,
+            letterSpacing: 2,
+            cursor: "pointer",
+            padding: "4px 10px",
+            borderRadius: 2,
+            transition: "border-color 0.2s, color 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "var(--purple-light)";
+            e.currentTarget.style.color = "var(--purple-light)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "var(--border)";
+            e.currentTarget.style.color = "var(--text-muted)";
           }}
         >
-          <div
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: "var(--purple-core)",
-              boxShadow: "0 0 8px var(--purple-core)",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 10,
-              letterSpacing: 4,
-              color: "var(--purple-light)",
-              textTransform: "uppercase",
-            }}
-          >
-            {displayedNodeId ? LABELS[displayedNodeId] : ""}
-          </span>
-          <button
-            onClick={onClose}
-            style={{
-              marginLeft: "auto",
-              background: "none",
-              border: "none",
-              color: "var(--text-muted)",
-              fontFamily: "var(--font-mono)",
-              fontSize: 9,
-              letterSpacing: 2,
-              cursor: "pointer",
-            }}
-          >
-            [ ESC ]
-          </button>
-        </div>
-
-        {/* Content */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "24px" }}>
-          {children}
-        </div>
+          ← BACK
+        </button>
+        <div
+          style={{
+            width: 1,
+            height: 16,
+            background: "var(--border)",
+            marginLeft: 4,
+          }}
+        />
+        <span
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            letterSpacing: 4,
+            color: "var(--purple-light)",
+            textTransform: "uppercase",
+          }}
+        >
+          {displayedNodeId ? LABELS[displayedNodeId] : ""}
+        </span>
       </div>
-    </>
+
+      {/* Content */}
+      <div style={{ flex: 1, overflowY: "auto", padding: "32px 28px" }}>
+        {children}
+      </div>
+    </div>
   );
 }
