@@ -1,6 +1,12 @@
 "use client";
 
-import { useRef, useState, useEffect, MutableRefObject } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  MutableRefObject,
+} from "react";
 import { NodeId } from "@/types/node";
 import { CanvasState } from "@/components/StarMap/starmap.types";
 import { usePanel } from "./use-panel";
@@ -29,15 +35,12 @@ export default function Panel({
     }
   }, [activeNodeId]);
 
-  usePanel({
-    activeNodeId,
-    panelRef,
-    canvasStateRef,
-    onCloseComplete: () => {
-      setIsVisible(false);
-      setDisplayedNodeId(null);
-    },
-  });
+  const onCloseComplete = useCallback(() => {
+    setIsVisible(false);
+    setDisplayedNodeId(null);
+  }, []);
+
+  usePanel({ activeNodeId, panelRef, canvasStateRef, onCloseComplete });
 
   if (!isVisible && !activeNodeId) return null;
 
@@ -78,9 +81,8 @@ export default function Panel({
           borderRight: "1px solid var(--border)",
           borderRadius: "8px 8px 0 0",
           zIndex: 20,
-          display: "flex",
+          display: "none",
           flexDirection: "column",
-          transform: "translateY(100%)",
           overflow: "hidden",
         }}
         onClick={(e) => e.stopPropagation()}

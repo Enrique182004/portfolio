@@ -30,8 +30,8 @@ export function usePanel({
 
     if (activeNodeId && !prev) {
       // Open from closed
+      gsap.set(panel, { display: "flex", y: "100%", x: "0%" });
       const tl = gsap.timeline();
-      tl.set(panel, { y: "100%", opacity: 1, display: "flex" });
       tl.to(
         canvasStateRef.current,
         { globalAlpha: 0.2, duration: 0.35, ease: "power2.out" },
@@ -41,7 +41,12 @@ export function usePanel({
       tlRef.current = tl;
     } else if (!activeNodeId && prev) {
       // Close
-      const tl = gsap.timeline({ onComplete: onCloseComplete });
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(panel, { display: "none" });
+          onCloseComplete();
+        },
+      });
       tl.to(panel, { y: "100%", duration: 0.35, ease: "power2.in" });
       tl.to(
         canvasStateRef.current,
