@@ -14,21 +14,25 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio",
+  title: "Enrique Calleros — Researcher & Developer",
+  description:
+    "Full-stack developer and researcher focused on web development, machine learning, and AI. UTEP Computer Science.",
+  openGraph: {
+    title: "Enrique Calleros — Researcher & Developer",
+    description:
+      "Full-stack developer and researcher focused on web development, machine learning, and AI.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${spaceMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${inter.variable} ${spaceMono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
