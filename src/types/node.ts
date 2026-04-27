@@ -4,6 +4,7 @@ export type NodeId =
   | "skills"
   | "projects"
   | "ai-ml"
+  | "games"
   | "contact";
 
 export interface NodeConfig {

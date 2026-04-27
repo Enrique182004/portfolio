@@ -19,6 +19,7 @@ const LABELS: Record<NodeId, string> = {
   skills: "Skills",
   projects: "Projects",
   "ai-ml": "AI / ML",
+  games: "Games",
   contact: "Contact",
 };
 

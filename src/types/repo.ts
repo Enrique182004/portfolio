@@ -10,4 +10,5 @@ export interface Repo {
   topics: string[];
   isLive: boolean;
   isAiMl: boolean;
+  isGame: boolean;
 }

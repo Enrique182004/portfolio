@@ -1,20 +1,27 @@
 import { Repo } from "@/types/repo";
 
-const AI_ML_KEYWORDS = [
-  "ml",
-  "ai",
-  "model",
-  "neural",
-  "classifier",
-  "nlp",
-  "deep",
-  "predict",
-  "dataset",
-  "vang",
-  "learn",
+const GITHUB_OWNER = "Enrique182004";
+
+// Word-boundary patterns prevent false positives:
+// - "html5" contains "ml" as substring → use \bml\b
+// - game bot descriptions say "AI opponents" → exclude that phrase
+const AI_ML_PATTERNS: RegExp[] = [
+  /\bml\b/,
+  /\bai\b(?! opponent| opponents)/,
+  /\bmodel\b/,
+  /neural/,
+  /classifier/,
+  /\bnlp\b/,
+  /\bdeep.?learn/,
+  /\bpredict/,
+  /\bdataset\b/,
+  /vangogh|vang\b/,
+  /machine.?learn/,
+  /\bllm\b/,
 ];
 
-const GITHUB_OWNER = "Enrique182004";
+const GAME_PATTERN =
+  /chess|connect4|connect-4|\bgame\b|checkers|puzzle|sudoku/i;
 
 interface RawRepo {
   id: number;
@@ -35,9 +42,17 @@ export function isAiMlRepo(r: {
   description: string | null;
   topics: string[];
 }): boolean {
-  const text =
-    `${r.name} ${r.description ?? ""} ${r.topics.join(" ")}`.toLowerCase();
-  return AI_ML_KEYWORDS.some((kw) => text.includes(kw));
+  const text = `${r.name} ${r.description ?? ""} ${r.topics.join(" ")}`;
+  return AI_ML_PATTERNS.some((p) => p.test(text));
+}
+
+export function isGameRepo(r: {
+  name: string;
+  description: string | null;
+  topics: string[];
+}): boolean {
+  const text = `${r.name} ${r.description ?? ""} ${r.topics.join(" ")}`;
+  return GAME_PATTERN.test(text);
 }
 
 export function mapRawRepo(r: RawRepo): Repo {
@@ -46,6 +61,7 @@ export function mapRawRepo(r: RawRepo): Repo {
     (r.has_pages
       ? `https://${GITHUB_OWNER.toLowerCase()}.github.io/${r.name}`
       : null);
+  const game = isGameRepo(r);
   return {
     id: r.id,
     name: r.name,
@@ -57,13 +73,14 @@ export function mapRawRepo(r: RawRepo): Repo {
     updated_at: r.updated_at,
     topics: r.topics ?? [],
     isLive: Boolean(liveUrl),
-    isAiMl: isAiMlRepo(r),
+    isAiMl: !game && isAiMlRepo(r),
+    isGame: game,
   };
 }
 
 export async function fetchRepos(): Promise<Repo[]> {
   const res = await fetch(
-    "https://api.github.com/users/Enrique182004/repos?sort=updated&per_page=100",
+    `https://api.github.com/users/${GITHUB_OWNER}/repos?sort=updated&per_page=100`,
     {
       next: { revalidate: 3600 },
       headers: { Accept: "application/vnd.github.v3+json" },

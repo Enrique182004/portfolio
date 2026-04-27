@@ -25,15 +25,18 @@ import AboutPanel from "@/components/panels/AboutPanel";
 import SkillsPanel from "@/components/panels/SkillsPanel";
 import ProjectsPanel from "@/components/panels/ProjectsPanel";
 import AiMlPanel from "@/components/panels/AiMlPanel";
+import GamesPanel from "@/components/panels/GamesPanel";
 import ContactPanel from "@/components/panels/ContactPanel";
 
+// 6-node hex layout around center — evenly spaced, symmetric
 const NODE_CONFIGS: NodeConfig[] = [
   { id: "hero", label: "Enrique Calleros", xRatio: 0.5, yRatio: 0.5 },
-  { id: "about", label: "About", xRatio: 0.22, yRatio: 0.25 },
-  { id: "skills", label: "Skills", xRatio: 0.78, yRatio: 0.25 },
-  { id: "projects", label: "Projects", xRatio: 0.18, yRatio: 0.72 },
-  { id: "ai-ml", label: "AI / ML", xRatio: 0.82, yRatio: 0.72 },
-  { id: "contact", label: "Contact", xRatio: 0.5, yRatio: 0.85 },
+  { id: "about", label: "About", xRatio: 0.22, yRatio: 0.22 },
+  { id: "skills", label: "Skills", xRatio: 0.78, yRatio: 0.22 },
+  { id: "projects", label: "Projects", xRatio: 0.1, yRatio: 0.55 },
+  { id: "ai-ml", label: "AI / ML", xRatio: 0.9, yRatio: 0.55 },
+  { id: "games", label: "Games", xRatio: 0.25, yRatio: 0.83 },
+  { id: "contact", label: "Contact", xRatio: 0.75, yRatio: 0.83 },
 ];
 
 const SATELLITE_IDS: NodeId[] = [
@@ -41,6 +44,7 @@ const SATELLITE_IDS: NodeId[] = [
   "skills",
   "projects",
   "ai-ml",
+  "games",
   "contact",
 ];
 
@@ -241,6 +245,9 @@ export default function StarMap({ repos }: StarMapProps) {
         {displayedNodeId === "projects" && <ProjectsPanel repos={repos} />}
         {displayedNodeId === "ai-ml" && (
           <AiMlPanel repos={repos.filter((r) => r.isAiMl)} />
+        )}
+        {displayedNodeId === "games" && (
+          <GamesPanel repos={repos.filter((r) => r.isGame)} />
         )}
         {displayedNodeId === "contact" && <ContactPanel />}
       </Panel>

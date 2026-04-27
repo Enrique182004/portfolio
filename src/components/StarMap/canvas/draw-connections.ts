@@ -6,6 +6,7 @@ const SATELLITE_IDS: NodeId[] = [
   "skills",
   "projects",
   "ai-ml",
+  "games",
   "contact",
 ];
 
