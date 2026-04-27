@@ -57,19 +57,25 @@ export function usePanel({
       tl.to(panel, { opacity: 1, duration: 0.35, ease: "power2.out" }, 0.85);
       tlRef.current = tl;
     } else if (!activeNodeId && prev) {
-      // --- Return to starmap ---
+      // --- Return to starmap (fly back) ---
+      // Canvas is currently at scale:6, opacity:0 — reveal it then zoom out
       const tl = gsap.timeline({
         onComplete: () => {
-          // Reset zoom state while canvas is invisible
-          gsap.set(zoom, { scale: 1, opacity: 0 });
           zoom.style.transformOrigin = "center center";
-          gsap.set(panel, { display: "none" });
-          // Fade canvas back in
-          gsap.to(zoom, { opacity: 1, duration: 0.5, ease: "power2.out" });
           onCloseComplete();
         },
       });
-      tl.to(panel, { opacity: 0, duration: 0.3, ease: "power2.in" });
+
+      // Fade out panel
+      tl.to(panel, { opacity: 0, duration: 0.25, ease: "power2.in" });
+      tl.call(() => gsap.set(panel, { display: "none" }));
+
+      // Reveal canvas (still at scale 6 from the zoom-in)
+      tl.to(zoom, { opacity: 1, duration: 0.2, ease: "power2.out" }, "<+=0.05");
+
+      // Zoom out — fly back to the starmap
+      tl.to(zoom, { scale: 1, duration: 0.85, ease: "power3.out" }, "<");
+
       tlRef.current = tl;
     } else if (activeNodeId && prev && activeNodeId !== prev) {
       // --- Jump between nodes ---
